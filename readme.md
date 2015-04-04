@@ -13,3 +13,7 @@ To run on linux run the script "*run_pipeline.sh*"
 1. Number of quartets considered is chosen to be 50, can be changed in the file "*src-pipeline/calculate_svd_scores.paup*"
 
 2. data folder contains only a sample of the 11-taxon dataset
+
+3. Tested on Ubuntu 12.04
+
+4. For running on mac use "*paup_mac*" inside the shell script
