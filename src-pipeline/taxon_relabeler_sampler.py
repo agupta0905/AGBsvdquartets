@@ -10,8 +10,9 @@ from os import listdir
 import random
 from collections import defaultdict
 import sys
+import getopt
 
-def processFilesTaxon(inp_folder,out_folder,dict_file,k):
+def processFilesTaxon(inp_folder,out_folder,dict_file,k,contigous,relabel):
     taxa_dict=defaultdict(str)
     dict_input=open(dict_file,'r')
     line=dict_input.readline()
@@ -45,18 +46,25 @@ def processFilesTaxon(inp_folder,out_folder,dict_file,k):
         else:
             continue
         dna = dendropy.DnaCharacterMatrix.get_from_path(inp_path,filetype)
-        new_dna_string=""
-        new_dna_string+=str(len(dna))+'\t'+str(dna.vector_size)+'\n'
-        for i in range(1,len(dna)+1):
-            new_taxon=str(i)
-            old_taxon=taxa_dict[new_taxon]
-            if(old_taxon and new_taxon and not(old_taxon.isspace()) and not(new_taxon.isspace())):
-                new_dna_string+=new_taxon+'\t'+str(dna[old_taxon])+'\n'
-        #print(new_dna_string)
-        newdna=dendropy.DnaCharacterMatrix.get_from_string(new_dna_string,'phylip')
+        if(relabel):
+            new_dna_string=""
+            new_dna_string+=str(len(dna))+'\t'+str(dna.vector_size)+'\n'
+            for i in range(1,len(dna)+1):
+                new_taxon=str(i)
+                old_taxon=taxa_dict[new_taxon]
+                if(old_taxon and new_taxon and not(old_taxon.isspace()) and not(new_taxon.isspace())):
+                    new_dna_string+=new_taxon+'\t'+str(dna[old_taxon])+'\n'
+            #print(new_dna_string)
+            newdna=dendropy.DnaCharacterMatrix.get_from_string(new_dna_string,'phylip')
+        else:
+            newdna=dna
         if not os.path.exists(out_folder):
             os.makedirs(out_folder)
-        indexlist=random.sample(xrange(newdna.vector_size),k)
+        if(contigous):
+            startindex=random.randint(0,newdna.vector_size-k)
+            indexlist=xrange(startindex,startindex+k)
+        else:
+            indexlist=random.sample(xrange(newdna.vector_size),k)
         newdna=dendropy.DnaCharacterMatrix.export_character_indices(newdna,indexlist)
         fileno=inp_file.split('_')[0]
         out_file=fileno+'_relabeled_sampled.phy'
@@ -64,14 +72,25 @@ def processFilesTaxon(inp_folder,out_folder,dict_file,k):
         newdna.write_to_path(out_path,'phylip')
         #print(newdna.description(3))
 
-
-
-
-
+def checkarguments(argv):
+    try:
+      opts, args = getopt.getopt(argv,"cn")
+    except getopt.GetoptError:
+      print 'taxon_relabeler_sampler.py <input_path> <dict_file> <k> -c -n'
+      sys.exit(2)
+      contigous=False
+    relabel=True
+    for opt, arg in opts:
+      if opt == '-c':
+         contigous=True
+      if opt == '-n':
+         relabel=False
+    return contigous,relabel
 
 if __name__ == "__main__":
+    contigous,relabel=checkarguments(sys.argv[1:])
     k=int(sys.argv[3])
     inp_folder=str(sys.argv[1])
     out_folder=join(str(sys.argv[1]),'relabeled_sampled_data_'+str(k))
     dict_file=str(sys.argv[2])
-    processFilesTaxon(inp_folder,out_folder,dict_file,k)
+    processFilesTaxon(inp_folder,out_folder,dict_file,k,contigous,relabel)
