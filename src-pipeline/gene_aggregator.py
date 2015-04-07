@@ -30,8 +30,9 @@ def processFiles(inp_folder,out_file):
     newdna.write_to_path(out_file,'nexus')
 
 if __name__ == "__main__":
-    k=int(sys.argv[2])
+    n=int(sys.argv[2])
+    k=int(sys.argv[3])
     curr_folder=str(sys.argv[1])
-    inp_folder=join(curr_folder,'relabeled_sampled_data_'+str(k))
-    out_file=join(curr_folder,'relabeled_sampled_combined_'+str(k)+'.nex')
+    inp_folder=join(curr_folder,'relabeled_shortened_sampled_data_'+str(n)+'_'+str(k))
+    out_file=join(curr_folder,'relabeled_shortened_sampled_combined_'+str(n)+'_'+str(k)+'.nex')
     processFiles(inp_folder,out_file)
