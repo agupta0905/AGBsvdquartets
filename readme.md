@@ -7,7 +7,7 @@ Pipeline to run SVDQuartet + QMC and SVDQuartet + wQMC on SNP data
 To run on linux run the script "*run_pipeline.sh*" 
 
 ##Example usage: 
-	./run_pipeline.sh data/model.10.200000.0.000001000/01 25 
+	./run_pipeline.sh data/model.10.200000.0.000001000/01 100 1 C 0
 
 ##Note
 1. Number of quartets considered is chosen to be 50, can be changed in the file "*src-pipeline/calculate_svd_scores.paup*"
