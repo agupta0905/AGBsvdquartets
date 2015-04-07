@@ -1,7 +1,0 @@
-begin paup;
-Execute ../input_data_for_paup.nex;
-log file=../paup_quartet_trees.txt start;
-SVDQuartets showScores=yes nquartets=50;                 
-log stop;
-end;
-quit;
