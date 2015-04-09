@@ -18,6 +18,7 @@ for FOLDERNUMBER in {1..50}; do
     cp ~/phylogenetic_tools/tree_comp/compareTrees .
     cp ~/phylogenetic_tools/tree_comp/compareTrees.missingBranch .
     ./compareTrees.missingBranch S_relabeled_tree.trees svd_qmc_s_tree_${n}_${k}.trees >> ~/SVD_experiments/AGBsvdquartets/data/model.10.1800000.0.000000111/results_${n}_${k}/FN_svd_qmc_${n}_${k}
+	
     #./compareTrees.missingBranch S_relabeled_tree.trees svd_wqmc_s_tree_${n}_${k}_${WCODE}.trees >> ~/SVD_experiments/AGBsvdquartets/data/model.10.1800000.0.000000111/results_${n}_${k}/FN_svd_wqmc_${n}_${k}_${WCODE}
     rm CompareTree.pl
     rm MOTree.pm
