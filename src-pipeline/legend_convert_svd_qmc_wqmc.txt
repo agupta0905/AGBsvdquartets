@@ -1,0 +1,30 @@
+Here we list the various ways in which we computed weights from SVD scores and how we selected weighted quartets as input to wQMC.
+
+For the following, k denotes the number of randomly sampled sites from each gene alignment. For each conversion scheme, we discarded quartets for which svd_max = 0. 
+A) Only the quartet topology corresponding to the lowest SVD score was used. Its weight was R = (svd_med - svd_min)/(svd_max*exp(svd_max - svd_med))
+
+B) Only the quartet topology corresponding to the lowest SVD score was used.
+Weight(q_min) = 1 - svd_min
+
+C) Only the quartet topology corresponding to the lowest SVD score was used.
+Weight(q_min) = 1/exp(svd_min)
+
+D) All quartet topologies were used. 
+Weight(q_min) = (1 - svd_min)*R
+Weight(q_med) = (1 - svd_med)*R
+Weight(q_max) = (1 - svd_max)*R
+
+E) All quartet topologies were used.
+Weight(q_min) = (1 - svd_min)
+Weight(q_med) = (1 - svd_med)
+Weight(q_max) = (1 - svd_max)
+
+F) All quartet topologies were used.
+Weight(q_min) = (1/exp(svd_min))*R
+Weight(q_med) = (1/exp(svd_med))*R
+Weight(q_max) = (1/exp(svd_max))*R
+
+G) All quartet topologies were used.
+Weight(q_min) = (1/exp(svd_min))
+Weight(q_med) = (1/exp(svd_med))
+Weight(q_max) = (1/exp(svd_max))
