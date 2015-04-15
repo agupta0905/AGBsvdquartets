@@ -40,11 +40,9 @@ def getInput(inp_file,out_file,outw_file):
         svd_med = sorted_svdscores_list[1][1]
         svd_max = sorted_svdscores_list[2][1]
         if(not(svd_min==svd_med)):
-            #R = (svd_med-svd_min)/(svd_max*math.exp(svd_max-svd_med))
             split0_weight = (1-svd_min)
             split1_weight = (1-svd_med)
             split2_weight = (1-svd_max)
-            #print svd_min, svd_med, svd_max
             outf.write(sorted_svdscores_list[0][0]+' ')
             outfw.write(sorted_svdscores_list[0][0]+':'+str(split0_weight)+' ')
             outfw.write(sorted_svdscores_list[1][0]+':'+str(split1_weight)+' ')

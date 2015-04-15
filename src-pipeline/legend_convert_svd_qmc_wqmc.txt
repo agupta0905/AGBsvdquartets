@@ -28,3 +28,18 @@ G) All quartet topologies were used.
 Weight(q_min) = (1/exp(svd_min))
 Weight(q_med) = (1/exp(svd_med))
 Weight(q_max) = (1/exp(svd_max))
+
+H) Only the quartet topology corresponding to the lowest SVD score was used.
+Weight(q_min) = A/exp(b*svd_min)
+where A=10, b=1000
+
+I) All quartet topologies were used.
+Weight(q_min) = A/exp(b*svd_min)
+Weight(q_med) = A/exp(b*svd_med)
+Weight(q_max) = A/exp(b*svd_max)
+where A=10, b=1000
+
+J) All quartet topologies were used.
+Weight(q_min) = -svd_min
+Weight(q_med) = -svd_med
+Weight(q_max) = -svd_max
