@@ -39,7 +39,7 @@ def getInput(inp_file,out_file,outw_file):
         svd_min = sorted_svdscores_list[0][1]
         svd_med = sorted_svdscores_list[1][1]
         svd_max = sorted_svdscores_list[2][1]
-        if svd_max>0:
+        if svd_max>0 and not(svd_min==svd_med):
             R = (svd_med-svd_min)/(svd_max*math.exp(svd_max-svd_med))
             split0_weight = R
             #split1_weight = 1-svd_med
