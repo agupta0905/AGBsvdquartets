@@ -11,7 +11,7 @@ for k in 1 5 10 25; do
     touch temp_qmc_${n}_${k}
     rm -f FN_svd_qmc_${n}_${k}
     touch FN_svd_qmc_${n}_${k}
-    for WCODE in A B C D E F G; do
+    for WCODE in A B C D E F G H I J; do
 	rm -f temp_wqmc_${n}_${k}_${WCODE}
 	touch temp_wqmc_${n}_${k}_${WCODE}
 	rm -f FN_svd_wqmc_${n}_${k}_${WCODE}
@@ -28,7 +28,7 @@ for FOLDERNUMBER in {1..50}; do
     for k in 1 5 10 25; do
 	./compareTrees.missingBranch S_relabeled_tree.trees svd_qmc_s_tree_${n}_${k}.trees >> ~/SVD_experiments/AGBsvdquartets/data/model.10.1800000.0.000000111/temp_qmc_${n}_${k}
 	
-	for WCODE in A B C D E F G; do
+	for WCODE in A B C D E F G H I J; do
 	    if [  ! -e "svd_wqmc_s_tree_${n}_${k}_${WCODE}.trees" ]; then
 		echo "no tree outputted for species ${FOLDERNUMBER} svd_wqmc_s_tree_${n}_${k}_${WCODE}.trees"
 	    fi
@@ -45,7 +45,7 @@ cd ~/SVD_experiments/AGBsvdquartets/data/model.10.1800000.0.000000111/
 for k in 1 5 10 25; do
     awk -vOFS=, '{ print $3 }' ~/SVD_experiments/AGBsvdquartets/data/model.10.1800000.0.000000111/temp_qmc_${n}_${k} | sed 's/,$/\n/' > FN_svd_qmc_${n}_${k}
     rm temp_qmc_${n}_${k}
-    for WCODE in A B C D E F G; do
+    for WCODE in A B C D E F G H I J; do
 	awk -vOFS=, '{ print $3 }' ~/SVD_experiments/AGBsvdquartets/data/model.10.1800000.0.000000111/temp_wqmc_${n}_${k}_${WCODE} | sed 's/,$/\n/' > FN_svd_wqmc_${n}_${k}_${WCODE}
 	rm temp_wqmc_${n}_${k}_${WCODE}
     done
@@ -54,8 +54,10 @@ done
 for k in 1 5 10 25; do
     temp=$(cat ~/SVD_experiments/AGBsvdquartets/data/model.10.1800000.0.000000111/FN_svd_qmc_${n}_${k})
     echo "FN_svd_qmc_"${n}"_"${k}"=c("${temp}")" >> FN_rates_all_${n}_R_format
-    for WCODE in A B C D E F G; do
+    for WCODE in A B C D E F G H I J; do
 	temp=$(cat ~/SVD_experiments/AGBsvdquartets/data/model.10.1800000.0.000000111/FN_svd_wqmc_${n}_${k}_${WCODE})
 	echo "FN_svd_wqmc_"${n}"_"${k}"_"${WCODE}"=c("${temp}")" >> FN_rates_all_${n}_R_format
     done
 done
+
+sed 's/ /,/g' FN_rates_all_${n}_R_format
