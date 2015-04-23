@@ -29,6 +29,8 @@ def processFilesTaxon(inp_folder,out_folder,dict_file):
         inp_path=join(inp_folder,inp_file)
         if inp_path.endswith('.phy'):
             filetype='phylip'
+        elif inp_path.endswith('.fasta'):
+            filetype='dnafasta'
         elif inp_path.endswith('s_tree.trees'):
             t = dendropy.Tree.get_from_path(inp_path, 'newick')
             for new_taxon in taxa_dict.keys():
