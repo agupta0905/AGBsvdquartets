@@ -12,8 +12,9 @@ under the "15-taxon datasets" link.
 https://www.ideals.illinois.edu/handle/2142/55319
 under the link "Sequence Alignments and Trees for Mammalian 2X for Mirarab et. al."
 
-Linux executables for the species tree estimation methods, 
+##Linux executables for the species tree estimation methods 
 ASTRAL [1], NJst [2], FastTree [3], and RAxML [4] are in the phylogenetic_tools folder. 
+
 The files in each "pipeline-" folder are a combination of shell scripts and qsub scripts 
 for the UIUC campus cluster. 
 
