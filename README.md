@@ -24,16 +24,3 @@ The linux executable for PAUP* [5]  is in the src-pipelines folder.
 
 The files in each "pipeline-" folder are a combination of shell scripts and qsub scripts 
 for the UIUC campus cluster. 
-
-0) pipeline-data_processing contains scripts to sample a portion of the shorten phylip alignments, 
-1) pipeline-summary_methods 
-
-
-
-
-
-
-1. 
-2. 
-3.
-4.
